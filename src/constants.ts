@@ -34,7 +34,7 @@ export const socialLinks: SocialLinkType[] = [
     {
         platform: 'Kick',
         href: 'https://kick.com/bravoxv',
-        svgIcon: '<svg width="30" height="30" viewBox="0 0 5 7" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;"><path d="M0 0 h2 v7 h-2 z M3 0 h2 v2 h-2 z M2 2 h2 v1 h-2 z M2 3 h1 v1 h-1 z M3 4 h2 v3 h-2 z"/></svg>',
+        svgIcon: '<svg width="36" height="36" viewBox="0 0 5 7" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges;"><path d="M0 0 h2 v7 h-2 z M3 0 h2 v2 h-2 z M2 2 h2 v1 h-2 z M2 3 h1 v1 h-1 z M3 4 h2 v3 h-2 z"/></svg>',
         color: 'border-green-500/50 hover:shadow-[0_0_15px_rgba(34,197,94,0.7)] hover:border-green-400'
     }
 ];
