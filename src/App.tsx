@@ -4,7 +4,7 @@ import SocialLink from './components/SocialLink';
 import Modal from './components/Modal';
 import BackgroundEffects from './components/BackgroundEffects';
 import DonateModalContent from './components/DonateModalContent';
-import UtterancesComments from './components/UtterancesComments';
+import GiscusComments from './components/GiscusComments'; // Cambiado
 import { profileImage } from './profileImageData';
 
 const App: React.FC = () => {
@@ -79,7 +79,7 @@ const App: React.FC = () => {
             </main>
 
             <Modal isOpen={isCommentModalOpen} onClose={() => setCommentModalOpen(false)} title="Muro de Comentarios Cósmicos">
-                 <UtterancesComments />
+                 <GiscusComments />
             </Modal>
 
             <Modal isOpen={isDonateModalOpen} onClose={() => setDonateModalOpen(false)} title="Apoya la Misión">
