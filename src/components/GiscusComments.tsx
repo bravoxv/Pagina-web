@@ -4,6 +4,11 @@ const GiscusComments: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        const container = containerRef.current;
+        if (!container) {
+            return;
+        }
+
         const script = document.createElement('script');
         script.src = 'https://giscus.app/client.js';
         script.setAttribute('data-repo', 'bravoxv/mi-universo-bravo-xv');
@@ -15,27 +20,26 @@ const GiscusComments: React.FC = () => {
         script.setAttribute('data-reactions-enabled', '1');
         script.setAttribute('data-emit-metadata', '0');
         script.setAttribute('data-input-position', 'bottom');
-        script.setAttribute('data-theme', 'preferred_color_scheme');
+        // Se establece un tema oscuro para que coincida con el diseño del sitio.
+        script.setAttribute('data-theme', 'dark');
         script.setAttribute('data-lang', 'es');
         script.setAttribute('crossorigin', 'anonymous');
         script.async = true;
 
-        const container = containerRef.current;
-        if (container) {
-            // Limpia el contenedor antes de añadir el nuevo script
-            // para evitar duplicados en desarrollo con Fast Refresh.
-            container.innerHTML = ''; 
-            container.appendChild(script);
-        }
+        // Limpia el contenedor para evitar duplicados en desarrollo con React StrictMode.
+        container.innerHTML = ''; 
+        container.appendChild(script);
 
         return () => {
+            // Limpia el script y el iframe de Giscus cuando el componente se desmonta.
             if (container) {
                 container.innerHTML = '';
             }
         };
     }, []);
 
-    return <div ref={containerRef} />;
+    // Giscus necesita que el contenedor tenga la clase 'giscus' para renderizarse correctamente.
+    return <div ref={containerRef} className="giscus" />;
 };
 
 export default GiscusComments;
