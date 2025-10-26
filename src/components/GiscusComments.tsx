@@ -32,9 +32,9 @@ const GiscusComments: React.FC = () => {
         scriptEl.setAttribute('data-category', 'General');
         scriptEl.setAttribute('data-category-id', 'DIC_kwDOQJLdOs4CxEk-');
         
-        // Se cambia a 'pathname' para que la discusión se base en la ruta de la página,
-        // una estrategia más robusta para GitHub Pages.
-        scriptEl.setAttribute('data-mapping', 'pathname'); 
+        // Se cambia a 'title' para que la discusión se base en el título de la página,
+        // una estrategia más robusta para esta aplicación de página única.
+        scriptEl.setAttribute('data-mapping', 'title'); 
         
         scriptEl.setAttribute('data-strict', '0');
         scriptEl.setAttribute('data-reactions-enabled', '1');
