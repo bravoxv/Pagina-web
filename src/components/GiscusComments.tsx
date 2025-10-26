@@ -32,7 +32,8 @@ const GiscusComments: React.FC = () => {
         scriptEl.setAttribute('data-repo-id', 'R_kgDOQJLdOg');
         scriptEl.setAttribute('data-category', 'General'); // Actualizado a 'General'
         scriptEl.setAttribute('data-category-id', 'DIC_kwDOQJLdOs4CxEk-'); // ID actualizado
-        scriptEl.setAttribute('data-mapping', 'url');
+        scriptEl.setAttribute('data-mapping', 'specific');
+        scriptEl.setAttribute('data-term', 'Comentarios Estelares');
         scriptEl.setAttribute('data-strict', '0');
         scriptEl.setAttribute('data-reactions-enabled', '1');
         scriptEl.setAttribute('data-emit-metadata', '0');
