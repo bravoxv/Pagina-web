@@ -1,45 +1,59 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
+/**
+ * Componente robusto para incrustar comentarios de Giscus.
+ * Crea e inyecta dinámicamente el script de Giscus en el DOM,
+ * asegurando que funcione correctamente dentro del ciclo de vida de un componente de React.
+ */
 const GiscusComments: React.FC = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
+    // Una referencia al elemento contenedor donde se montará Giscus.
+    const commentsRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const container = containerRef.current;
-        if (!container) {
+        const commentsContainer = commentsRef.current;
+        if (!commentsContainer) {
             return;
         }
 
-        const script = document.createElement('script');
-        script.src = 'https://giscus.app/client.js';
-        script.setAttribute('data-repo', 'bravoxv/mi-universo-bravo-xv');
-        script.setAttribute('data-repo-id', 'R_kgDOQJLdOg'); 
-        script.setAttribute('data-category', 'Announcements');
-        script.setAttribute('data-category-id', 'DIC_kwDOQJLdOs4CxEk9');
-        script.setAttribute('data-mapping', 'url');
-        script.setAttribute('data-strict', '0');
-        script.setAttribute('data-reactions-enabled', '1');
-        script.setAttribute('data-emit-metadata', '0');
-        script.setAttribute('data-input-position', 'bottom');
-        // Se establece un tema oscuro para que coincida con el diseño del sitio.
-        script.setAttribute('data-theme', 'dark');
-        script.setAttribute('data-lang', 'es');
-        script.setAttribute('crossorigin', 'anonymous');
-        script.async = true;
+        // Para evitar que se agreguen scripts duplicados por el StrictMode de React
+        // en desarrollo, primero limpiamos el contenedor.
+        commentsContainer.innerHTML = '';
 
-        // Limpia el contenedor para evitar duplicados en desarrollo con React StrictMode.
-        container.innerHTML = ''; 
-        container.appendChild(script);
+        // Creamos el elemento script con toda la configuración necesaria de Giscus.
+        const scriptEl = document.createElement('script');
+        scriptEl.src = 'https://giscus.app/client.js';
+        scriptEl.async = true;
+        scriptEl.setAttribute('crossorigin', 'anonymous');
 
+        // --- Configuración de Giscus ---
+        // Estos atributos son críticos para conectar con el repositorio y la discusión correctos de GitHub.
+        // Se han actualizado para usar los valores de la configuración más reciente.
+        scriptEl.setAttribute('data-repo', 'bravoxv/mi-universo-bravo-xv');
+        scriptEl.setAttribute('data-repo-id', 'R_kgDOQJLdOg');
+        scriptEl.setAttribute('data-category', 'General'); // Actualizado a 'General'
+        scriptEl.setAttribute('data-category-id', 'DIC_kwDOQJLdOs4CxEk-'); // ID actualizado
+        scriptEl.setAttribute('data-mapping', 'url');
+        scriptEl.setAttribute('data-strict', '0');
+        scriptEl.setAttribute('data-reactions-enabled', '1');
+        scriptEl.setAttribute('data-emit-metadata', '0');
+        scriptEl.setAttribute('data-input-position', 'bottom');
+        scriptEl.setAttribute('data-theme', 'dark'); // Usamos un tema oscuro fijo para la consistencia del sitio
+        scriptEl.setAttribute('data-lang', 'es');
+
+        // Añadimos el script configurado a nuestro contenedor, lo que activa la carga de Giscus.
+        commentsContainer.appendChild(scriptEl);
+
+        // La función de limpieza se asegura de que el contenedor se vacíe cuando el componente se desmonte.
         return () => {
-            // Limpia el script y el iframe de Giscus cuando el componente se desmonta.
-            if (container) {
-                container.innerHTML = '';
+            if (commentsContainer) {
+                commentsContainer.innerHTML = '';
             }
         };
-    }, []);
 
-    // Giscus necesita que el contenedor tenga la clase 'giscus' para renderizarse correctamente.
-    return <div ref={containerRef} className="giscus" />;
+    }, []); // El array de dependencias vacío asegura que este efecto se ejecute solo una vez cuando el componente se monta.
+
+    // Este div es el destino de Giscus. La clase 'giscus' ayuda a Giscus a identificar el contenedor.
+    return <div ref={commentsRef} className="giscus" />;
 };
 
 export default GiscusComments;
