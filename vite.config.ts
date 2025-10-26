@@ -8,5 +8,5 @@ export default defineConfig({
   // El valor de 'base' DEBE ser el nombre de tu repositorio de GitHub,
   // comenzando y terminando con una barra inclinada.
   // Ejemplo: si tu repositorio se llama 'mi-proyecto', aquí debe ser '/mi-proyecto/'.
-  base: '/mi-universo-bravo-xv/', 
+  base: '/mi-universo-bravo-xv/',
 })
