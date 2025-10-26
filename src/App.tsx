@@ -1,41 +1,15 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { socialLinks } from './constants';
 import SocialLink from './components/SocialLink';
 import Modal from './components/Modal';
 import BackgroundEffects from './components/BackgroundEffects';
 import DonateModalContent from './components/DonateModalContent';
 import GiscusComments from './components/GiscusComments';
-import { profileImage as defaultProfileImage } from './profileImageData';
+import { profileImage } from './profileImageData';
 
 const App: React.FC = () => {
     const [isDonateModalOpen, setDonateModalOpen] = useState(false);
     const [isCommentModalOpen, setCommentModalOpen] = useState(false);
-    const [profileImage, setProfileImage] = useState(defaultProfileImage);
-    const fileInputRef = useRef<HTMLInputElement>(null);
-
-    useEffect(() => {
-        const savedImage = localStorage.getItem('userProfileImage');
-        if (savedImage) {
-            setProfileImage(savedImage);
-        }
-    }, []);
-
-    const handleImageUploadClick = () => {
-        fileInputRef.current?.click();
-    };
-
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const base64String = reader.result as string;
-                setProfileImage(base64String);
-                localStorage.setItem('userProfileImage', base64String);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
     
     return (
         <div className="relative min-h-screen w-full font-sans text-white overflow-hidden flex items-center justify-center p-4">
@@ -59,27 +33,11 @@ const App: React.FC = () => {
             </div>
 
             <main className="container relative z-10 flex flex-col items-center justify-center text-center max-w-2xl mx-auto animate-fade-in-up">
-                <div className="relative w-[450px] h-[450px] mb-6 flex items-center justify-center group">
+                <div className="relative w-[450px] h-[450px] mb-6 flex items-center justify-center">
                      <img 
                         src={profileImage}
                         alt="Logo de Bravo-XV" 
-                        className="w-56 h-auto absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 group-hover:brightness-75"
-                    />
-
-                    <button
-                        onClick={handleImageUploadClick}
-                        className="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white p-4 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
-                        aria-label="Cambiar imagen de perfil"
-                    >
-                        <i className="fas fa-camera text-2xl"></i>
-                    </button>
-
-                    <input
-                        type="file"
-                        ref={fileInputRef}
-                        onChange={handleFileChange}
-                        accept="image/*"
-                        className="hidden"
+                        className="w-56 h-auto absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                     />
 
                     <div className="absolute w-full h-full">
