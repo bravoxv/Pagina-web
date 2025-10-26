@@ -121,7 +121,7 @@ const App: React.FC = () => {
                 </p>
             </main>
 
-            <Modal isOpen={isCommentModalOpen} onClose={() => setCommentModalOpen(false)} title="Muro de Comentarios Cósmicos">
+            <Modal isOpen={isCommentModalOpen} onClose={() => setCommentModalOpen(false)} title="Comentarios">
                  <GiscusComments />
             </Modal>
 
