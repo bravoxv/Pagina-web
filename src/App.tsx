@@ -42,13 +42,13 @@ const App: React.FC = () => {
                     <div className="absolute w-full h-full">
                         {socialLinks.map((link, index) => {
                             const angle = (index / socialLinks.length) * 360;
-                            const radius = 160; // Reduced radius for a more centered look
+                            const radius = 170; // Increased radius to accommodate larger icons
                             const x = Math.cos((angle - 90) * (Math.PI / 180)) * radius;
                             const y = Math.sin((angle - 90) * (Math.PI / 180)) * radius;
                             return (
                                 <div
                                     key={link.platform}
-                                    className="absolute top-1/2 left-1/2 w-12 h-12 -m-6"
+                                    className="absolute top-1/2 left-1/2 w-14 h-14 -m-7"
                                     style={{
                                         transform: `translate(${x}px, ${y}px)`
                                     }}
