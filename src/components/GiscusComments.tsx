@@ -37,7 +37,7 @@ const GiscusComments: React.FC = () => {
         scriptEl.setAttribute('data-reactions-enabled', '1');
         scriptEl.setAttribute('data-emit-metadata', '0');
         scriptEl.setAttribute('data-input-position', 'bottom');
-        scriptEl.setAttribute('data-theme', 'dark'); // Usamos un tema oscuro fijo para la consistencia del sitio
+        scriptEl.setAttribute('data-theme', 'preferred_color_scheme'); // Se restaura el tema adaptable
         scriptEl.setAttribute('data-lang', 'es');
 
         // Añadimos el script configurado a nuestro contenedor, lo que activa la carga de Giscus.
