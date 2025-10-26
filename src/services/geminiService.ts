@@ -21,7 +21,7 @@ export const generateThankYouMessage = async (comment: string): Promise<string> 
             contents: prompt,
         });
 
-        return response.text;
+        return response.text ?? "¡Gracias por tu mensaje! Ha sido recibido en el cosmos.";
     } catch (error) {
         console.error("Error generating thank you message with Gemini:", error);
         throw new Error("Could not connect with the Gemini constellation.");
