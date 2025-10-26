@@ -1,51 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { socialLinks } from './constants';
 import SocialLink from './components/SocialLink';
 import Modal from './components/Modal';
 import BackgroundEffects from './components/BackgroundEffects';
 import DonateModalContent from './components/DonateModalContent';
-import CommentSection from './components/CommentSection';
-import type { CommentType } from './types';
+import UtterancesComments from './components/UtterancesComments';
 import { profileImage } from './profileImageData';
 
 const App: React.FC = () => {
     const [isDonateModalOpen, setDonateModalOpen] = useState(false);
     const [isCommentModalOpen, setCommentModalOpen] = useState(false);
-    const [comments, setComments] = useState<CommentType[]>([]);
-
-    useEffect(() => {
-        try {
-            const storedComments = localStorage.getItem('bravo-xv-comments');
-            if (storedComments) {
-                setComments(JSON.parse(storedComments));
-            }
-        } catch (error) {
-            console.error("Failed to parse comments from localStorage", error);
-            setComments([]);
-        }
-    }, []);
-
-    useEffect(() => {
-        try {
-            localStorage.setItem('bravo-xv-comments', JSON.stringify(comments));
-        } catch (error) {
-            console.error("Failed to save comments to localStorage", error);
-        }
-    }, [comments]);
-
-    const addComment = (name: string, text: string) => {
-        const newComment: CommentType = {
-            id: Date.now(),
-            name,
-            text,
-            timestamp: new Date().toISOString(),
-        };
-        setComments(prevComments => [newComment, ...prevComments]);
-    };
-
-    const deleteComment = (id: number) => {
-        setComments(prevComments => prevComments.filter(comment => comment.id !== id));
-    };
     
     return (
         <div className="relative min-h-screen w-full font-sans text-white overflow-hidden flex items-center justify-center p-4">
@@ -115,11 +79,7 @@ const App: React.FC = () => {
             </main>
 
             <Modal isOpen={isCommentModalOpen} onClose={() => setCommentModalOpen(false)} title="Muro de Comentarios Cósmicos">
-                 <CommentSection 
-                    comments={comments}
-                    addComment={addComment}
-                    deleteComment={deleteComment}
-                />
+                 <UtterancesComments />
             </Modal>
 
             <Modal isOpen={isDonateModalOpen} onClose={() => setDonateModalOpen(false)} title="Apoya la Misión">
