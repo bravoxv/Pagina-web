@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 const DonateModalContent: React.FC = () => {
@@ -6,6 +5,9 @@ const DonateModalContent: React.FC = () => {
     const cvu = "0000177500000007475928";
 
     const handleCopy = () => {
+        // Prevent re-triggering the animation if already in copied state
+        if (copied) return;
+
         navigator.clipboard.writeText(cvu).then(() => {
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
@@ -14,6 +16,27 @@ const DonateModalContent: React.FC = () => {
 
     return (
         <div className="text-center text-gray-300 space-y-6">
+            {/* Styles for the checkmark animation */}
+            <style>{`
+                @keyframes check-animation {
+                    0% {
+                        transform: scale(0.5);
+                        opacity: 0;
+                    }
+                    50% {
+                        transform: scale(1.2);
+                        opacity: 1;
+                    }
+                    100% {
+                        transform: scale(1);
+                        opacity: 1;
+                    }
+                }
+                .animate-check {
+                    animation: check-animation 0.4s ease-out forwards;
+                }
+            `}</style>
+            
             <p>
                 Si te gusta mi contenido, considera apoyarme. ¡Cada contribución me ayuda a seguir creando y explorando nuevos universos!
             </p>
@@ -25,10 +48,15 @@ const DonateModalContent: React.FC = () => {
                         <span className="font-mono text-sm tracking-tighter text-gray-200">{cvu}</span>
                         <button 
                             onClick={handleCopy} 
-                            className="bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold py-1 px-3 rounded-md transition-all duration-200 hover:shadow-[0_0_10px_rgba(192,132,252,0.6)]"
+                            className="bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold py-1 px-3 rounded-md transition-all duration-200 hover:shadow-[0_0_10px_rgba(192,132,252,0.6)] w-[70px] h-[26px] flex items-center justify-center disabled:opacity-75 disabled:cursor-not-allowed"
                             aria-label="Copiar CVU"
+                            disabled={copied}
                         >
-                            {copied ? '¡Copiado!' : 'Copiar'}
+                            {copied ? (
+                                <i className="fas fa-check text-lg animate-check"></i>
+                            ) : (
+                                'Copiar'
+                            )}
                         </button>
                     </div>
                 </div>
