@@ -27,18 +27,20 @@ const GiscusComments: React.FC = () => {
 
         // --- Configuración de Giscus ---
         // Estos atributos son críticos para conectar con el repositorio y la discusión correctos de GitHub.
-        // Se han actualizado para usar los valores de la configuración más reciente.
         scriptEl.setAttribute('data-repo', 'bravoxv/mi-universo-bravo-xv');
         scriptEl.setAttribute('data-repo-id', 'R_kgDOQJLdOg');
-        scriptEl.setAttribute('data-category', 'General'); // Actualizado a 'General'
-        scriptEl.setAttribute('data-category-id', 'DIC_kwDOQJLdOs4CxEk-'); // ID actualizado
-        scriptEl.setAttribute('data-mapping', 'specific');
-        scriptEl.setAttribute('data-term', 'Comentarios Estelares');
+        scriptEl.setAttribute('data-category', 'General');
+        scriptEl.setAttribute('data-category-id', 'DIC_kwDOQJLdOs4CxEk-');
+        
+        // Se cambia a 'pathname' para que la discusión se base en la ruta de la página,
+        // una estrategia más robusta para GitHub Pages.
+        scriptEl.setAttribute('data-mapping', 'pathname'); 
+        
         scriptEl.setAttribute('data-strict', '0');
         scriptEl.setAttribute('data-reactions-enabled', '1');
         scriptEl.setAttribute('data-emit-metadata', '0');
         scriptEl.setAttribute('data-input-position', 'bottom');
-        scriptEl.setAttribute('data-theme', 'preferred_color_scheme'); // Se restaura el tema adaptable
+        scriptEl.setAttribute('data-theme', 'preferred_color_scheme');
         scriptEl.setAttribute('data-lang', 'es');
 
         // Añadimos el script configurado a nuestro contenedor, lo que activa la carga de Giscus.
